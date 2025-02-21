@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 .formWrapper {
-  @apply h-[calc(100vh-60px)] flex items-center justify-center;
+  @apply flex items-center justify-center h-full;
 }
 .form {
-  @apply w-[600px] flex flex-col items-center justify-center aspect-square rounded-lg shadow-md bg-sky-100;
+  @apply w-[600px] flex flex-col items-center justify-center aspect-square rounded-lg shadow-md bg-zinc-50  p-[30px];
 }
+
 .button {
-  @apply rounded-md shadow-md p-[10px] mt-[20px] cursor-pointer w-full bg-sky-400 text-white;
+  @apply rounded-md shadow-md px-[10px] py-[15px] mt-[20px] cursor-pointer w-full bg-sky-400 text-white;
 }
 
 .h3 {
-  @apply text-4xl font-bold mb-[30px] text-center;
+  @apply text-4xl font-bold mb-[30px] text-center text-gray-800;
+  @apply lg:text-5xl;
 }

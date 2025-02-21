@@ -51,7 +51,7 @@ export default function Nav() {
     <li
       key={menu.name}
       className={`cursor-pointer ${
-        menu.name === "프로필" ? "ml-auto" : "ml-8"
+        menu.name === "프로필" ? "sm:ml-auto" : "sm:ml-8"
       }`}
     >
       {menu.type === MENU_TYPE.LINK ? (

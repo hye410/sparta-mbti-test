@@ -4,13 +4,12 @@ export default function Layout({ children }) {
   return (
     <div
       id="layout"
-      style={{
-        width: "100vw",
-        height: "100vh",
-      }}
+      className="w-screen min-w-xs h-screen bg-slate-200 flex flex-col"
     >
       <Header />
-      {children}
+      <div id="container" className="flex-1 overflow-auto py-[5vh] px-[5vw]">
+        {children}
+      </div>
     </div>
   );
 }

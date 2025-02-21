@@ -3,8 +3,8 @@ import Nav from "./Nav";
 
 export default function Header() {
   return (
-    <header className="bg-sky-400  ">
-      <nav className="w-screen max-w-screen-xl  min-w-[350px] m-auto px-[2vw] py-[1vw] text-white ">
+    <header className="bg-sky-400">
+      <nav className="p-5 text-white sm:py-5 sm:px-12">
         <ul className="flex items-center justify-between">
           <li className="cursor-pointer">
             <Link to="/">홈</Link>
