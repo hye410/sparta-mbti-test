@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { PATH } from "../constant/pathConstant";
+import { useAuth } from "../../context/AuthContext";
+import { PATH } from "../../constant/pathConstant";
 const { LOGIN, TEST, MY_PAGE, RESULT } = PATH;
 const MENU_TYPE = { LINK: "link", BUTTON: "button" };
 const PublicMenu = () => [

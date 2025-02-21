@@ -5,9 +5,9 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { lazy, Suspense } from "react";
-import Loading from "../components/Loading";
+import Loading from "../components/common/Loading";
 const { LOGIN, SIGN_UP, TEST, MY_PAGE, RESULT } = PATH;
 import { AuthProvider, useAuth } from "../context/AuthContext";
 import { PATH } from "../constant/pathConstant";
