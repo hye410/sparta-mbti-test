@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { signin } from "../api/auth";
 import Form from "../components/common/Form";
 import { useAuth } from "../context/AuthContext";
@@ -8,6 +9,7 @@ const loginFormdata = [
     type: "text",
     initValue: "",
     placeholder: "아이디",
+    autoFocus: true,
   },
   {
     id: "password",
@@ -31,13 +33,21 @@ export default function Login() {
     }
   };
   return (
-    <section>
-      <h3>로그인</h3>
-      <Form
-        formData={loginFormdata}
-        handleSubmit={handleSubmit}
-        SubmitButton="로그인"
-      />
-    </section>
+    <div className="formWrapper">
+      <section className="form">
+        <h3 className="h3">로그인</h3>
+        <Form
+          formData={loginFormdata}
+          handleSubmit={handleSubmit}
+          submitButton="로그인"
+        />
+        <p className="text-sm text-slate-400">
+          아직 회원이 아니세요?{" "}
+          <Link to="/signup" className="text-red-600 underline">
+            회원가입
+          </Link>
+        </p>
+      </section>
+    </div>
   );
 }

@@ -1,7 +1,3 @@
 export default function Test() {
-  return (
-    <>
-      <div className="">테스트</div>
-    </>
-  );
+  return "테스트~~~";
 }

@@ -4,16 +4,18 @@ export default function TextField({
   placeholder = "",
   id,
   value = "",
+  autoFocus = false,
   onChange = null,
 }) {
   return (
     <>
       {label && <label>{label}</label>}
       <input
-        style={{ border: "1px solid #000" }}
+        className="rounded-md shadow-md px-[10px] py-[15px] mb-[20px] border-gray-200 w-full"
         type={type}
         value={value?.[id]}
         placeholder={placeholder}
+        autoFocus={autoFocus}
         onChange={(e) => onChange(e, id)}
       />
     </>
