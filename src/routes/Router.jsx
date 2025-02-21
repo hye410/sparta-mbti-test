@@ -14,9 +14,9 @@ import { PATH } from "../constant/pathConstant";
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
 const Signup = lazy(() => import("../pages/Signup"));
-const Test = lazy(() => import("../pages/Test"));
+const TestPage = lazy(() => import("../pages/TestPage"));
 const MyPage = lazy(() => import("../pages/MyPage"));
-const Result = lazy(() => import("../pages/Result"));
+const Results = lazy(() => import("../pages/Results"));
 
 const ProtectedRoute = () => {
   const { isAuthenticated } = useAuth();
@@ -34,9 +34,9 @@ export default function Router() {
               <Route path={LOGIN} element={<Login />} />
               <Route path={SIGN_UP} element={<Signup />} />
               <Route element={<ProtectedRoute />}>
-                <Route path={TEST} element={<Test />} />
+                <Route path={TEST} element={<TestPage />} />
                 <Route path={MY_PAGE} element={<MyPage />} />
-                <Route path={RESULT} element={<Result />} />
+                <Route path={RESULT} element={<Results />} />
               </Route>
             </Routes>
           </Suspense>

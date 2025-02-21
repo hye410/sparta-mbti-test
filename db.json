@@ -1,0 +1,36 @@
+{
+  "testResults": [
+    {
+      "id": "bf5a",
+      "userId": "dana10",
+      "nickname": "점메추",
+      "result": "ESTJ",
+      "visibility": true,
+      "date": "2025-02-21 21:18:31"
+    },
+    {
+      "id": "9997",
+      "userId": "dhye410",
+      "nickname": "다나",
+      "result": "ESTJ",
+      "visibility": true,
+      "date": "2025-02-21 21:19:29"
+    },
+    {
+      "id": "f1ae",
+      "userId": "user1234",
+      "nickname": "user",
+      "result": "ESTJ",
+      "visibility": true,
+      "date": "2025-02-21 21:19:57"
+    },
+    {
+      "id": "981f",
+      "userId": "dana10",
+      "nickname": "점메추",
+      "result": "ISFJ",
+      "visibility": true,
+      "date": "2025-02-21 21:40:53"
+    }
+  ]
+}

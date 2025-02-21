@@ -3,5 +3,5 @@ export const PATH = Object.freeze({
   SIGN_UP: "/signup",
   TEST: "/test",
   MY_PAGE: "/mypage",
-  RESULT: "/result",
+  RESULT: "/results",
 });
