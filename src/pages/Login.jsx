@@ -1,19 +1,29 @@
-import { useState } from "react";
 import { signin } from "../api/auth";
+import Form from "../components/common/Form";
 import { useAuth } from "../context/AuthContext";
 
+const loginFormdata = [
+  {
+    id: "id",
+    type: "text",
+    initValue: "",
+    placeholder: "아이디",
+  },
+  {
+    id: "password",
+    type: "password",
+    initValue: "",
+    placeholder: "비밀번호",
+  },
+];
+
 export default function Login() {
-  const [formData, setFormData] = useState({ id: "", password: "" });
   const { login } = useAuth();
 
-  const handleChangeFormData = (e, target) => {
-    setFormData({ ...formData, [target]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, userInfo) => {
     e.preventDefault();
     try {
-      const res = await signin(formData);
+      const res = await signin(userInfo);
       login(res);
     } catch (error) {
       console.error(error);
@@ -23,21 +33,11 @@ export default function Login() {
   return (
     <section>
       <h3>로그인</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          style={{ border: "1px solid #000" }}
-          type="text"
-          value={formData.id}
-          onChange={(e) => handleChangeFormData(e, "id")}
-        />
-        <input
-          style={{ border: "1px solid #000" }}
-          type="password"
-          value={formData.password}
-          onChange={(e) => handleChangeFormData(e, "password")}
-        />
-        <button type="submit">로그인</button>
-      </form>
+      <Form
+        formData={loginFormdata}
+        handleSubmit={handleSubmit}
+        SubmitButton="로그인"
+      />
     </section>
   );
 }
