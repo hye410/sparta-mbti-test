@@ -1,10 +1,9 @@
-import axios from "axios";
+import { localApi } from "./api";
 
-const API_URL = "http://localhost:4000/testResults";
 const user = JSON.parse(sessionStorage.getItem("user"));
 
 export const getTestResults = async () => {
-  const response = await axios.get(API_URL);
+  const response = await localApi.get("/testResults");
   const filteredByVisibility = response.data.filter(
     (data) => user.userId === data.userId || data.visibility
   );
@@ -12,16 +11,16 @@ export const getTestResults = async () => {
 };
 
 export const createTestResult = async (resultData) => {
-  const response = await axios.post(API_URL, resultData);
+  const response = await localApi.post("/testResults", resultData);
   return response.data;
-};
+}; //TODO: 요청할 때 intercept해서 유효성 체크
 
 export const deleteTestResult = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
+  const response = await localApi.delete(`/testResults/${id}`);
   console.log("response=>", response);
 };
 
 export const updateTestResultVisibility = async (id, visibility) => {
-  const response = await axios.patch(`${API_URL}/${id}`, visibility);
+  const response = await localApi.patch(`/testResults/${id}`, visibility);
   console.log("response=>", response);
-};
+}; //TODO: 요청할 때 intercept해서 유효성 체크

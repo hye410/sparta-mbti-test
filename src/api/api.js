@@ -8,3 +8,12 @@ api.interceptors.response.use(null, (reject) => {
   const { data } = reject.response;
   throw data?.message || "오류가 발생했습니다.";
 });
+
+export const localApi = axios.create({
+  baseURL: "http://localhost:4000",
+});
+
+localApi.interceptors.response.use(null, (reject) => {
+  const { data } = reject.response;
+  throw data?.message || "오류가 발생했습니다.";
+});

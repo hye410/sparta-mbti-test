@@ -15,6 +15,7 @@ export default function ResultCard({ result }) {
       console.log("res", res);
     } catch (error) {
       console.error(error);
+      alert(error);
     }
   };
 
@@ -24,6 +25,7 @@ export default function ResultCard({ result }) {
       console.log("res", res);
     } catch (error) {
       console.log(error);
+      alert(error);
     }
   };
 
