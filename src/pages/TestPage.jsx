@@ -52,10 +52,7 @@ const TestPage = () => {
               {mbtiDescriptions[result] ||
                 "해당 성격 유형에 대한 설명이 없습니다."}
             </p>
-            <button
-              onClick={handleNavigateToResults}
-              className="w-full bg-primary-color text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 hover:text-[#FF5A5F]"
-            >
+            <button onClick={handleNavigateToResults} className="button">
               결과 페이지로 이동하기
             </button>
           </>

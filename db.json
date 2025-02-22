@@ -1,19 +1,11 @@
 {
   "testResults": [
     {
-      "id": "bf5a",
-      "userId": "dana10",
-      "nickname": "점메추",
-      "result": "ESTJ",
-      "visibility": true,
-      "date": "2025-02-21 21:18:31"
-    },
-    {
       "id": "9997",
       "userId": "dhye410",
       "nickname": "다나",
       "result": "ESTJ",
-      "visibility": true,
+      "visibility": false,
       "date": "2025-02-21 21:19:29"
     },
     {
@@ -25,12 +17,12 @@
       "date": "2025-02-21 21:19:57"
     },
     {
-      "id": "981f",
+      "id": "2b96",
       "userId": "dana10",
-      "nickname": "점메추",
-      "result": "ISFJ",
-      "visibility": true,
-      "date": "2025-02-21 21:40:53"
+      "nickname": "오호라",
+      "result": "INFJ",
+      "visibility": false,
+      "date": "2025-02-22 19:46:37"
     }
   ]
 }
