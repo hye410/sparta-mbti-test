@@ -1,13 +1,14 @@
 import { useState } from "react";
 import TestForm from "../components/test/TestForm";
-import { calculateMBTI, mbtiDescriptions } from "../utils/mbtiCalculator";
+import { calculateMBTI } from "../utils/mbtiCalculator";
 import { createTestResult } from "../api/testResults";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getLocaleTime } from "../utils/formatTime";
+import TestResult from "../components/test/TestResult";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TestPage = () => {
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
   const { userData } = useAuth();
 
@@ -26,14 +27,18 @@ const TestPage = () => {
       await createTestResult(payload);
     } catch (error) {
       console.error(error);
-      const { response } = error;
-      alert(`[${response.status}]${response.data?.message}`);
+      alert(error);
     }
   };
 
-  const handleNavigateToResults = () => {
-    navigate("/results", { replace: true });
-  };
+  const { mutate } = useMutation({
+    mutationFn: handleTestSubmit,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testResults"],
+      });
+    },
+  });
 
   return (
     <div className=" flex flex-col items-center justify-center mx-auto">
@@ -43,21 +48,10 @@ const TestPage = () => {
             <h1 className="text-3xl font-bold text-primary-color mb-6">
               MBTI 테스트
             </h1>
-            <TestForm onSubmit={handleTestSubmit} />
+            <TestForm onSubmit={(answers) => mutate(answers)} />
           </>
         ) : (
-          <>
-            <h1 className="text-3xl font-bold text-primary-color mb-6">
-              테스트 결과: {result}
-            </h1>
-            <p className="text-lg text-gray-700 mb-6">
-              {mbtiDescriptions[result] ||
-                "해당 성격 유형에 대한 설명이 없습니다."}
-            </p>
-            <button onClick={handleNavigateToResults} className="button">
-              결과 페이지로 이동하기
-            </button>
-          </>
+          <TestResult result={result} />
         )}
       </article>
     </div>

@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteTestResult,
   updateTestResultVisibility,
@@ -6,13 +7,14 @@ import { useAuth } from "../../context/AuthContext";
 import { mbtiDescriptions } from "../../utils/mbtiCalculator";
 
 export default function ResultCard({ result }) {
+  const queryClient = useQueryClient();
   const { userData } = useAuth();
   const isPostByThisUser = userData.userId === result.userId;
 
-  const handleChangeVisibility = async (id, visibility) => {
+  const handleChangeVisibility = async (changeData) => {
     try {
-      const res = await updateTestResultVisibility(id, visibility);
-      console.log("res", res);
+      const { postId, isVisible } = changeData;
+      await updateTestResultVisibility(postId, { visibility: isVisible });
     } catch (error) {
       console.error(error);
       alert(error);
@@ -21,13 +23,30 @@ export default function ResultCard({ result }) {
 
   const handleDelete = async (id) => {
     try {
-      const res = await deleteTestResult(id);
-      console.log("res", res);
+      await deleteTestResult(id);
     } catch (error) {
       console.log(error);
       alert(error);
     }
   };
+
+  const { mutate: mutateVisibility } = useMutation({
+    mutationFn: handleChangeVisibility,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testResults"],
+      });
+    },
+  });
+
+  const { mutate: mutateDelete } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testResults"],
+      });
+    },
+  });
 
   return (
     <section className="w-[70%] max-w-[600px] min-w-[300px] bg-white px-[2vw] py-[3vh] mx-[auto] my-[30px] rounded-md shadow-md">
@@ -45,9 +64,9 @@ export default function ResultCard({ result }) {
         <div style={{ textAlign: "right" }}>
           <button
             onClick={() =>
-              handleChangeVisibility(result.id, {
-                ...result,
-                visibility: !result.visibility,
+              mutateVisibility({
+                postId: result.id,
+                isVisible: !result.visibility,
               })
             }
             className="button !w-[120px] !py-[10px] mr-5"
@@ -56,7 +75,7 @@ export default function ResultCard({ result }) {
           </button>
           <button
             className="button !w-[70px] !py-[10px] !bg-red-500"
-            onClick={() => handleDelete(result.id)}
+            onClick={() => mutateDelete(result.id)}
           >
             삭제
           </button>
