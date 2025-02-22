@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api/auth";
 import Form from "../components/common/Form";
 
@@ -25,11 +25,14 @@ const signupFormData = [
 ];
 
 export default function Signup() {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e, userInfo) => {
     e.preventDefault();
     try {
-      const res = await signup(userInfo);
-      console.log("요청성공", res);
+      await signup(userInfo);
+      alert(`환영합니다. ${userInfo.nickname}님!\n로그인을 해주세요.`);
+      navigate("/login", { replace: true });
     } catch (error) {
       console.error(error);
       alert(`[${error.status}] ${error.message}`);

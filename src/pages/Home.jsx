@@ -25,7 +25,11 @@ export default function Home() {
   const navigate = useNavigate();
 
   const moveToTestPage = () => {
-    return navigate(isAuthenticated ? TEST : LOGIN);
+    if (!isAuthenticated) {
+      alert("먼저 로그인을 해주세요.");
+      navigate(LOGIN, { replace: true });
+    }
+    navigate(TEST);
   };
 
   return (

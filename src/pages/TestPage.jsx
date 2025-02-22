@@ -26,11 +26,13 @@ const TestPage = () => {
       await createTestResult(payload);
     } catch (error) {
       console.error(error);
+      const { response } = error;
+      alert(`[${response.status}]${response.data?.message}`);
     }
   };
 
   const handleNavigateToResults = () => {
-    navigate("/results");
+    navigate("/results", { replace: true });
   };
 
   return (
