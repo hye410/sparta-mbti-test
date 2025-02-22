@@ -13,7 +13,7 @@ export default function TextField({
       <input
         className="rounded-md shadow-md px-[10px] py-[15px] mb-[20px] border-gray-200 w-full"
         type={type}
-        value={value?.[id]}
+        value={value}
         placeholder={placeholder}
         autoFocus={autoFocus}
         onChange={(e) => onChange(e, id)}

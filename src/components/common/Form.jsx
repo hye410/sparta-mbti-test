@@ -6,10 +6,17 @@ export default function Form({
   handleSubmit,
   submitButton = "완료",
 }) {
-  const [form, setForm] = useState({ id: "", password: "" });
+  const initialValue = formData.reduce((init, data) => {
+    init[data.id] = data.initValue;
+    return init;
+  }, {});
+
+  const [form, setForm] = useState(initialValue);
+
   const handleFormChange = (e, formId) => {
     setForm({ ...form, [formId]: e.target.value });
   };
+
   return (
     <form
       onSubmit={(e) => handleSubmit(e, form)}
@@ -19,6 +26,7 @@ export default function Form({
         <TextField
           key={data.id}
           id={data.id}
+          label={data.label}
           type={data.type}
           autoFocus={data.autoFocus}
           value={form[data.id]}
