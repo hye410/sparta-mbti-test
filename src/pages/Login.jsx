@@ -29,9 +29,10 @@ export default function Login() {
       login(res);
     } catch (error) {
       console.error(error);
-      alert(`[${error.status}] ${error.message}`);
+      alert(error);
     }
   };
+
   return (
     <div className="formWrapper">
       <section className="form">

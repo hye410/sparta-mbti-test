@@ -15,8 +15,12 @@ const profileFormData = [
 export default function MyPage() {
   const handleChangeProfile = async (e, newProfile) => {
     e.preventDefault();
-    const res = await updateProfile(newProfile);
-    console.log("res", res);
+    try {
+      await updateProfile(newProfile);
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
   };
   return (
     <div className="formWrapper">
