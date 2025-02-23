@@ -20,7 +20,7 @@ export default function Results() {
   } = useQuery({
     queryKey: ["testResults"],
     queryFn: getResults,
-    staleTime: 1000 * 2, //3분 유지
+    staleTime: 1000 * 60 * 3, //3분 유지
     refetchOnWindowFocus: false,
   });
 

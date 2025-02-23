@@ -3,13 +3,13 @@ import {
   deleteTestResult,
   updateTestResultVisibility,
 } from "../../api/testResults";
-import { useAuth } from "../../context/AuthContext";
 import { mbtiDescriptions } from "../../utils/mbtiCalculator";
+import useUserStore from "../../zustand/userStore";
 
 export default function ResultCard({ result }) {
   const queryClient = useQueryClient();
-  const { userData } = useAuth();
-  const isPostByThisUser = userData.userId === result.userId;
+  const { user } = useUserStore();
+  const isPostByThisUser = user.userId === result.userId;
 
   const handleChangeVisibility = async (changeData) => {
     try {

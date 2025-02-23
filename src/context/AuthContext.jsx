@@ -1,33 +1,32 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../zustand/userStore";
 const AuthContext = createContext();
 
 const token = sessionStorage.getItem("accessToken");
-const user = sessionStorage.getItem("user");
+
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
-  const [userData, setUserData] = useState(JSON.parse(user));
+  const { setUser, initUser } = useUserStore((state) => state);
+
   const navigate = useNavigate();
   const login = (userInfo) => {
     const { accessToken, userId, nickname, avatar } = userInfo;
     sessionStorage.setItem("accessToken", accessToken);
-    sessionStorage.setItem(
-      "user",
-      JSON.stringify({ userId, nickname, avatar })
-    );
+    setUser({ userId, nickname, avatar });
     setIsAuthenticated(true);
-    setUserData({ userId, nickname, avatar });
     navigate("/");
   };
 
   const logout = () => {
     sessionStorage.removeItem("accessToken");
     setIsAuthenticated(false);
+    initUser();
     navigate("/", { replace: true });
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userData, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
