@@ -6,14 +6,17 @@
   @apply flex items-center justify-center h-full;
 }
 .form {
-  @apply w-[600px] flex flex-col items-center justify-center aspect-square rounded-lg shadow-md bg-zinc-50  p-[30px];
+  @apply w-screen h-full flex flex-col items-center justify-center aspect-square rounded-lg shadow-md bg-zinc-50 px-[15px] py-[25px] sm:p-[30px] sm:w-[600px] sm:h-[auto];
 }
 
 .button {
-  @apply rounded-md shadow-md px-[10px] py-[15px] mt-[20px] cursor-pointer w-full bg-sky-400 text-white;
+  @apply rounded-md shadow-md whitespace-nowrap px-[10px] py-[15px] mt-[20px] cursor-pointer w-full bg-sky-400 text-white;
 }
 
 .h3 {
-  @apply text-4xl font-bold mb-[30px] text-center text-gray-800;
-  @apply lg:text-5xl;
+  @apply text-3xl font-bold mb-[15px] sm:mb-[30px] text-center text-gray-800 sm:text-4xl;
+}
+
+.ps {
+  @apply text-sm text-slate-400 mt-[20px];
 }

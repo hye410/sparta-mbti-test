@@ -20,7 +20,7 @@ export default function Form({
   return (
     <form
       onSubmit={(e) => handleSubmit(e, form)}
-      className="bg-zinc-100 w-[90%] py-[35px] px-[40px] mb-[20px] rounded-md shadow-md"
+      className="bg-zinc-100 w-[90%] py-[35px] px-[40px]  rounded-md shadow-md"
     >
       {formData.map((data) => (
         <TextField

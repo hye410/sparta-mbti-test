@@ -54,7 +54,7 @@ export default function Signup() {
           handleSubmit={handleSubmit}
           submitButton="회원가입"
         />
-        <p className="text-sm text-slate-400">
+        <p className="ps">
           이미 계정이 있으신가요?{" "}
           <Link to="/login" className="text-red-600 underline">
             로그인
