@@ -23,6 +23,61 @@
       "result": "INFJ",
       "visibility": false,
       "date": "2025-02-22 19:46:37"
+    },
+    {
+      "id": "698a",
+      "userId": "dhye410",
+      "nickname": "Dana11",
+      "result": "INTJ",
+      "visibility": true,
+      "date": "2025-02-23 16:30:03"
+    },
+    {
+      "id": "42f7",
+      "userId": "dhye410",
+      "nickname": "Dana12",
+      "result": "ESFJ",
+      "visibility": true,
+      "date": "2025-02-23 16:42:13"
+    },
+    {
+      "id": "7bf4",
+      "userId": "dana10",
+      "nickname": "새로운닉네임",
+      "result": "ESFJ",
+      "visibility": true,
+      "date": "2025-02-23 17:20:28"
+    },
+    {
+      "id": "21c1",
+      "nickname": "아메리카노",
+      "result": "ISFJ",
+      "visibility": true,
+      "date": "2025-02-23 18:05:06"
+    },
+    {
+      "id": "3c47",
+      "userId": "newbie00",
+      "nickname": "뉴비",
+      "result": "ESTJ",
+      "visibility": false,
+      "date": "2025-02-23 18:09:40"
+    },
+    {
+      "id": "7ca7",
+      "userId": "newbie00",
+      "nickname": "뉴비23",
+      "result": "INTJ",
+      "visibility": true,
+      "date": "2025-02-23 18:14:22"
+    },
+    {
+      "id": "6b8d",
+      "userId": "newbie00",
+      "nickname": "뉴비~",
+      "result": "ESTJ",
+      "visibility": true,
+      "date": "2025-02-23 18:15:28"
     }
   ]
 }

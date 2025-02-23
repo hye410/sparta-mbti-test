@@ -1,16 +1,34 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { createTestResult } from "../api/testResults";
+import { createTestResult, getTargetUserResult } from "../api/testResults";
 import TestForm from "../components/test/TestForm";
 import TestResult from "../components/test/TestResult";
 import { getLocaleTime } from "../utils/formatTime";
 import { calculateMBTI } from "../utils/mbtiCalculator";
+import { checkToCompleteAnswers } from "../utils/validation";
 import useUserStore from "../zustand/userStore";
 
 const TestPage = () => {
   const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
   const { user } = useUserStore((state) => state);
+
+  const getUserResult = async () => {
+    try {
+      const result = await getTargetUserResult(user);
+      return result;
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
+  };
+
+  const { data: userResult } = useQuery({
+    queryKey: ["testResults", user?.userId, user?.nickname],
+    queryFn: getUserResult,
+    staleTime: Infinity,
+    gcTime: 1000 * 60,
+  });
 
   const handleTestSubmit = async (answers) => {
     const mbtiResult = calculateMBTI(answers);
@@ -40,6 +58,16 @@ const TestPage = () => {
     },
   });
 
+  const checkValid = (answers) => {
+    if (checkToCompleteAnswers(answers))
+      return alert("문항을 모두 선택해 주세요.");
+    const isDuplicated = userResult && userResult.length !== 0;
+    if (isDuplicated)
+      return alert("이미 동일한 닉네임으로 진행한 테스트가 있습니다.");
+
+    return mutate(answers);
+  };
+
   return (
     <div className=" flex flex-col items-center justify-center mx-auto">
       <article className="bg-white rounded-lg shadow-md min-w-lg h-full overflow-y-scroll w-[100%] p-4 sm:p-4  md:p-8 md:w-[60%]">
@@ -48,7 +76,7 @@ const TestPage = () => {
             <h1 className="text-3xl font-bold text-primary-color mb-6">
               MBTI 테스트
             </h1>
-            <TestForm onSubmit={(answers) => mutate(answers)} />
+            <TestForm onSubmit={(answers) => checkValid(answers)} />
           </>
         ) : (
           <TestResult result={result} />

@@ -39,6 +39,6 @@ export default function Results() {
   }
 
   return results?.map((result) => (
-    <ResultCard result={result} key={`${result.nickname}_result`} />
+    <ResultCard result={result} key={`resultCard_${result.id}`} />
   ));
 }
