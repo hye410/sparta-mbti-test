@@ -1,20 +1,20 @@
-import { useState } from "react";
-import TestForm from "../components/test/TestForm";
-import { calculateMBTI } from "../utils/mbtiCalculator";
-import { createTestResult } from "../api/testResults";
-import { useAuth } from "../context/AuthContext";
-import { getLocaleTime } from "../utils/formatTime";
-import TestResult from "../components/test/TestResult";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { createTestResult } from "../api/testResults";
+import TestForm from "../components/test/TestForm";
+import TestResult from "../components/test/TestResult";
+import { getLocaleTime } from "../utils/formatTime";
+import { calculateMBTI } from "../utils/mbtiCalculator";
+import useUserStore from "../zustand/userStore";
 
 const TestPage = () => {
   const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
-  const { userData } = useAuth();
+  const { user } = useUserStore((state) => state);
 
   const handleTestSubmit = async (answers) => {
     const mbtiResult = calculateMBTI(answers);
-    const { userId, nickname } = userData;
+    const { userId, nickname } = user;
     const payload = {
       userId,
       nickname,

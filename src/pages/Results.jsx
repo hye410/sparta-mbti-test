@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTestResults } from "../api/testResults";
 import ResultCard from "../components/results/ResultCard";
+import useUserStore from "../zustand/userStore";
 
 export default function Results() {
+  const { user } = useUserStore((state) => state);
   const getResults = async () => {
     try {
       const res = await getTestResults();
@@ -22,6 +24,11 @@ export default function Results() {
     queryFn: getResults,
     staleTime: 1000 * 60 * 3, //3분 유지
     refetchOnWindowFocus: false,
+    select: (results) => {
+      return results.filter(
+        (result) => user.userId === result.userId || result.visibility
+      );
+    },
   });
 
   if (isPending) {

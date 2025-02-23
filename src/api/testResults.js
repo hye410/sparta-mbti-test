@@ -1,13 +1,8 @@
 import { localApi } from "./api";
 
-const user = JSON.parse(sessionStorage.getItem("user"));
-
 export const getTestResults = async () => {
   const response = await localApi.get("/testResults");
-  const filteredByVisibility = response.data.filter(
-    (data) => user.userId === data.userId || data.visibility
-  );
-  return filteredByVisibility;
+  return response.data;
 };
 
 export const createTestResult = async (resultData) => {
