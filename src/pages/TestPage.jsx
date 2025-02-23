@@ -7,7 +7,10 @@ import { getLocaleTime } from "../utils/formatTime";
 import { calculateMBTI } from "../utils/mbtiCalculator";
 import { checkToCompleteAnswers } from "../utils/validation";
 import useUserStore from "../zustand/userStore";
+import { ALERT_TYPE } from "../constant/alertConstant";
+import { openAlert } from "../utils/openAlert";
 
+const { ERROR } = ALERT_TYPE;
 const TestPage = () => {
   const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
@@ -19,7 +22,7 @@ const TestPage = () => {
       return result;
     } catch (error) {
       console.error(error);
-      alert(error);
+      openAlert({ type: ERROR, text: error });
     }
   };
 
@@ -45,7 +48,7 @@ const TestPage = () => {
       await createTestResult(payload);
     } catch (error) {
       console.error(error);
-      alert(error);
+      openAlert({ type: ERROR, text: error });
     }
   };
 

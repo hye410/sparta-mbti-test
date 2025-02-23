@@ -5,7 +5,9 @@ import {
 } from "../../api/testResults";
 import { mbtiDescriptions } from "../../utils/mbtiCalculator";
 import useUserStore from "../../zustand/userStore";
-
+import { openAlert } from "../../utils/openAlert.js";
+import { ALERT_TYPE } from "../../constant/alertConstant.js";
+const { WARNING, ERROR } = ALERT_TYPE;
 export default function ResultCard({ result }) {
   const queryClient = useQueryClient();
   const { user } = useUserStore();
@@ -17,7 +19,7 @@ export default function ResultCard({ result }) {
       await updateTestResultVisibility(postId, { visibility: isVisible });
     } catch (error) {
       console.error(error);
-      alert(error);
+      openAlert({ type: ERROR, text: error });
     }
   };
 
@@ -25,8 +27,8 @@ export default function ResultCard({ result }) {
     try {
       await deleteTestResult(id);
     } catch (error) {
-      console.log(error);
-      alert(error);
+      console.error(error);
+      openAlert({ type: ERROR, text: error });
     }
   };
 
@@ -48,6 +50,25 @@ export default function ResultCard({ result }) {
     },
   });
 
+  const confirmUserReq = (type) => {
+    let text = "삭제하시겠습니까?",
+      func = () => mutateDelete(result.id);
+    if (type === "switch") {
+      text = `${result.visibility ? "비공개" : "공개"}로 전환하시겠습니까?`;
+      func = () =>
+        mutateVisibility({
+          postId: result.id,
+          isVisible: !result.visibility,
+        });
+    }
+    openAlert({
+      type: WARNING,
+      text,
+    }).then((res) => {
+      if (res.isConfirmed) func();
+    });
+  };
+
   return (
     <section className="w-[70%] max-w-[600px] min-w-[300px] bg-white px-[2vw] py-[3vh] mx-[auto] my-[30px] rounded-md shadow-md">
       <div className="flex items-center justify-between pb-[20px] mb-[20px] border-b-2 border-b-slate-700">
@@ -63,19 +84,14 @@ export default function ResultCard({ result }) {
       {isPostByThisUser && (
         <div style={{ textAlign: "right" }}>
           <button
-            onClick={() =>
-              mutateVisibility({
-                postId: result.id,
-                isVisible: !result.visibility,
-              })
-            }
+            onClick={() => confirmUserReq("switch")}
             className="button !w-[120px] !py-[10px] mr-5"
           >
             {result.visibility ? "비공개로 전환" : "공개로 전환"}
           </button>
           <button
             className="button !w-[70px] !py-[10px] !bg-red-500"
-            onClick={() => mutateDelete(result.id)}
+            onClick={() => confirmUserReq("delete")}
           >
             삭제
           </button>

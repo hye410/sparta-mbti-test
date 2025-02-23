@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getTestResults } from "../api/testResults";
 import ResultCard from "../components/results/ResultCard";
 import useUserStore from "../zustand/userStore";
-
+import { openAlert } from "../utils/openAlert";
+import { ALERT_TYPE } from "../constant/alertConstant";
+const { ERROR } = ALERT_TYPE;
 export default function Results() {
   const { user } = useUserStore((state) => state);
   const getResults = async () => {
@@ -11,7 +13,10 @@ export default function Results() {
       return res;
     } catch (error) {
       console.error(error);
-      alert(error);
+      openAlert({
+        type: ERROR,
+        text: error,
+      });
     }
   };
 

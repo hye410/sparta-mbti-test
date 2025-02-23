@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { signin } from "../api/auth";
 import Form from "../components/common/Form";
 import { useAuth } from "../context/AuthContext";
+import { openAlert } from "../utils/openAlert";
+import { ALERT_TYPE } from "../constant/alertConstant";
 
 const loginFormdata = [
   {
@@ -19,6 +21,7 @@ const loginFormdata = [
   },
 ];
 
+const { ERROR } = ALERT_TYPE;
 export default function Login() {
   const { login } = useAuth();
 
@@ -29,7 +32,7 @@ export default function Login() {
       login(res);
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      openAlert({ type: ERROR, text: error.message });
     }
   };
 

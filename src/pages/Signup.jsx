@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api/auth";
 import Form from "../components/common/Form";
+import { openAlert } from "../utils/openAlert";
+import { ALERT_TYPE } from "../constant/alertConstant";
 
 const signupFormData = [
   {
@@ -24,6 +26,7 @@ const signupFormData = [
   },
 ];
 
+const { SUCCESS, ERROR } = ALERT_TYPE;
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -31,11 +34,14 @@ export default function Signup() {
     e.preventDefault();
     try {
       await signup(userInfo);
-      alert(`환영합니다. ${userInfo.nickname}님!\n로그인을 해주세요.`);
+      openAlert({
+        type: SUCCESS,
+        text: `${userInfo.nickname}님 환영합니다! 로그인을 해주세요.`,
+      });
       navigate("/login", { replace: true });
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      openAlert({ type: ERROR, text: error.message });
     }
   };
 

@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import Card from "../components/home/Card";
 import { PATH } from "../constant/pathConstant";
 import { useAuth } from "../context/AuthContext";
+import { openAlert } from "../utils/openAlert";
+import { ALERT_TYPE } from "../constant/alertConstant";
 
 const CardData = [
   {
@@ -19,6 +21,7 @@ const CardData = [
 ];
 
 const { LOGIN, TEST } = PATH;
+const { INFO } = ALERT_TYPE;
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -26,10 +29,10 @@ export default function Home() {
 
   const moveToTestPage = () => {
     if (!isAuthenticated) {
-      alert("먼저 로그인을 해주세요.");
-      navigate(LOGIN, { replace: true });
-    }
-    navigate(TEST);
+      openAlert({ type: INFO, text: "로그인을 해주세요." }).then((res) => {
+        if (res.isConfirmed) navigate(LOGIN, { replace: true });
+      });
+    } else navigate(TEST);
   };
 
   return (

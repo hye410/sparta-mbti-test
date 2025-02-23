@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../api/profile";
 import Form from "../components/common/Form";
 import useUserStore from "../zustand/userStore";
+import { openAlert } from "../utils/openAlert";
+import { ALERT_TYPE } from "../constant/alertConstant";
 
 const profileFormData = (initNickname) => [
   {
@@ -13,7 +15,7 @@ const profileFormData = (initNickname) => [
     autoFocus: true,
   },
 ];
-
+const { SUCCESS, ERROR } = ALERT_TYPE;
 export default function MyPage() {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore((state) => state);
@@ -22,13 +24,20 @@ export default function MyPage() {
     try {
       const res = await updateProfile(newProfile);
       setUser(newProfile);
-      alert(res.message);
+      openAlert({
+        type: SUCCESS,
+        text: res.message,
+      });
     } catch (error) {
       console.error(error);
-      alert(error.message);
-      if (error.code === 401) {
-        navigate("/login", { replace: true });
-      }
+      openAlert({
+        type: ERROR,
+        text: error.message,
+      }).then((res) => {
+        if (res.isConfirmed) {
+          error.code === 401 ? navigate("/login", { replace: true }) : null;
+        }
+      });
     }
   };
   return (
