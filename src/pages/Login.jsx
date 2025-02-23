@@ -29,7 +29,7 @@ export default function Login() {
       login(res);
     } catch (error) {
       console.error(error);
-      alert(error);
+      alert(error.message);
     }
   };
 

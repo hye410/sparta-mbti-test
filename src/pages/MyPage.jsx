@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../api/profile";
 import Form from "../components/common/Form";
 import useUserStore from "../zustand/userStore";
@@ -14,6 +15,7 @@ const profileFormData = (initNickname) => [
 ];
 
 export default function MyPage() {
+  const navigate = useNavigate();
   const { user, setUser } = useUserStore((state) => state);
   const handleChangeProfile = async (e, newProfile) => {
     e.preventDefault();
@@ -23,7 +25,10 @@ export default function MyPage() {
       alert(res.message);
     } catch (error) {
       console.error(error);
-      alert(error);
+      alert(error.message);
+      if (error.code === 401) {
+        navigate("/login", { replace: true });
+      }
     }
   };
   return (
@@ -33,7 +38,7 @@ export default function MyPage() {
         <Form
           formData={profileFormData(user.nickname ?? "")}
           handleSubmit={handleChangeProfile}
-          submitButton="변경"
+          submitButton="프로필 업데이트"
         />
       </section>
     </div>

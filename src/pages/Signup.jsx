@@ -35,7 +35,7 @@ export default function Signup() {
       navigate("/login", { replace: true });
     } catch (error) {
       console.error(error);
-      alert(error);
+      alert(error.message);
     }
   };
 
