@@ -7,7 +7,7 @@ export default function TestResult({ result }) {
     navigate("/results", { replace: true });
   };
   return (
-    <>
+    <section className="bg-white rounded-lg shadow-md min-w-lg h-full overflow-y-scroll w-[100%] max-w-[700px] p-4 sm:p-4  md:p-8 md:w-[60%] ">
       <h1 className="text-3xl font-bold text-primary-color mb-6">
         테스트 결과: {result}
       </h1>
@@ -17,6 +17,6 @@ export default function TestResult({ result }) {
       <button onClick={handleNavigateToResults} className="button">
         결과 페이지로 이동하기
       </button>
-    </>
+    </section>
   );
 }
