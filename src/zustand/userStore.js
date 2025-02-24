@@ -6,7 +6,7 @@ const useUserStore = create(
     (set) => ({
       user: {},
       setUser: (userData) => {
-        set((state) => (state.user = { ...state.user, ...userData }));
+        set((state) => ({ user: { ...state.user, ...userData } }));
       },
       initUser: () => {
         set((state) => (state.user = {}));
