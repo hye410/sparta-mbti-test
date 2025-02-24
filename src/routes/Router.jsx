@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter,
   Navigate,
@@ -5,12 +6,11 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Layout from "../components/layout/Layout";
-import { lazy, Suspense } from "react";
 import Loading from "../components/common/Loading";
-const { LOGIN, SIGN_UP, TEST, MY_PAGE, RESULT } = PATH;
-import { AuthProvider, useAuth } from "../context/AuthContext";
+import Layout from "../components/layout/Layout";
 import { PATH } from "../constant/pathConstant";
+import { AuthProvider, useAuth } from "../context/AuthContext";
+const { LOGIN, SIGN_UP, TEST, MY_PAGE, RESULT } = PATH;
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
 const Signup = lazy(() => import("../pages/Signup"));
