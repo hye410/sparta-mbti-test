@@ -40,7 +40,7 @@ export default function Signup() {
         type: SUCCESS,
         text: `${userInfo.nickname}님 환영합니다! 로그인을 해주세요.`,
       });
-      navigate({ LOGIN }, { replace: true });
+      navigate(LOGIN, { replace: true });
     } catch (error) {
       console.error(error);
       openAlert({ type: ERROR, text: error.message });
