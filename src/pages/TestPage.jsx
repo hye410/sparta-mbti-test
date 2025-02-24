@@ -10,7 +10,7 @@ import useUserStore from "../zustand/userStore";
 import { ALERT_TYPE } from "../constant/alertConstant";
 import { openAlert } from "../utils/openAlert";
 
-const { ERROR } = ALERT_TYPE;
+const { ERROR, INFO } = ALERT_TYPE;
 const TestPage = () => {
   const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
@@ -63,10 +63,13 @@ const TestPage = () => {
 
   const checkValid = (answers) => {
     if (checkToCompleteAnswers(answers))
-      return alert("문항을 모두 선택해 주세요.");
+      return openAlert({ type: INFO, content: "문항을 모두 선택해 주세요." });
     const isDuplicated = userResult && userResult.length !== 0;
     if (isDuplicated)
-      return alert("이미 동일한 닉네임으로 진행한 테스트가 있습니다.");
+      return openAlert({
+        type: INFO,
+        content: "동일한 닉네임으로 진행한 테스트가 존재합니다.",
+      });
 
     return mutate(answers);
   };
