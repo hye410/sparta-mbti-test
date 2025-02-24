@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { mbtiDescriptions } from "../../utils/mbtiCalculator";
+import { SharedButton } from "../common/SharedButton";
 
 export default function TestResult({ result }) {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function TestResult({ result }) {
       <button onClick={handleNavigateToResults} className="button">
         결과 페이지로 이동하기
       </button>
-    </section>
+      <SharedButton />
+    </>
   );
 }
