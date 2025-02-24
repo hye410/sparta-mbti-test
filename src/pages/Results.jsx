@@ -4,6 +4,7 @@ import ResultCard from "../components/results/ResultCard";
 import useUserStore from "../zustand/userStore";
 import { openAlert } from "../utils/openAlert";
 import { ALERT_TYPE } from "../constant/alertConstant";
+import Empty from "../components/results/Empty";
 const { ERROR } = ALERT_TYPE;
 export default function Results() {
   const { user } = useUserStore((state) => state);
@@ -24,6 +25,7 @@ export default function Results() {
     data: results,
     isPending,
     isError,
+    isFetching,
   } = useQuery({
     queryKey: ["testResults"],
     queryFn: getResults,
@@ -36,6 +38,9 @@ export default function Results() {
     },
   });
 
+  if (isFetching) {
+    return <div>데이터를 받아오는 중..</div>;
+  }
   if (isPending) {
     return <div>데이터 로딩 중...</div>;
   }
@@ -43,7 +48,11 @@ export default function Results() {
     return <div>에러가 발생했습니다.</div>;
   }
 
-  return results?.map((result) => (
-    <ResultCard result={result} key={`resultCard_${result.id}`} />
-  ));
+  return results.length === 0 ? (
+    <Empty />
+  ) : (
+    results.map((result) => (
+      <ResultCard result={result} key={`resultCard_${result.id}`} />
+    ))
+  );
 }
