@@ -19,6 +19,6 @@ export default function TestResult({ result }) {
         결과 페이지로 이동하기
       </button>
       <SharedButton />
-    </>
+    </section>
   );
 }
