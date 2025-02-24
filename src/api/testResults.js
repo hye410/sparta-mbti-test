@@ -17,11 +17,9 @@ export const createTestResult = async (resultData) => {
 };
 
 export const deleteTestResult = async (id) => {
-  const response = await localApi.delete(`/testResults/${id}`);
-  console.log("response=>", response);
+  await localApi.delete(`/testResults/${id}`);
 };
 
 export const updateTestResultVisibility = async (id, visibility) => {
-  const response = await localApi.patch(`/testResults/${id}`, visibility);
-  console.log("response=>", response);
+  await localApi.patch(`/testResults/${id}`, visibility);
 };
