@@ -14,7 +14,7 @@ const shareByKaKao = () => {
     content: {
       title: "MBTI TEST",
       description: "나의 MBTI는 무엇일까?🧐",
-      imageUrl: "/public/thumbnail.png",
+      imageUrl: "https://sparta-mbti-test.vercel.app/thumbnail.png",
       link: {
         mobileWebUrl: URL,
         webUrl: URL,
