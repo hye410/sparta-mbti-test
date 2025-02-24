@@ -76,18 +76,16 @@ const TestPage = () => {
 
   return (
     <div className=" flex flex-col items-center justify-center mx-auto">
-      <article className="bg-white rounded-lg shadow-md min-w-lg h-full overflow-y-scroll w-[100%] p-4 sm:p-4  md:p-8 md:w-[60%]">
-        {!result ? (
-          <>
-            <h1 className="text-3xl font-bold text-primary-color mb-6">
-              MBTI 테스트
-            </h1>
-            <TestForm onSubmit={(answers) => checkValid(answers)} />
-          </>
-        ) : (
-          <TestResult result={result} />
-        )}
-      </article>
+      {!result ? (
+        <article className="bg-white rounded-lg shadow-md min-w-lg h-full overflow-y-scroll w-[100%] p-4 sm:p-4  md:p-8 md:w-[60%]">
+          <h1 className="text-3xl font-bold text-primary-color mb-6">
+            MBTI 테스트
+          </h1>
+          <TestForm onSubmit={(answers) => checkValid(answers)} />
+        </article>
+      ) : (
+        <TestResult result={result} />
+      )}
     </div>
   );
 };
