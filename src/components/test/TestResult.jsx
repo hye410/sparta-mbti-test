@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { mbtiDescriptions } from "../../utils/mbtiCalculator";
 import { SharedButton } from "../common/SharedButton";
-
+import { PATH } from "../../constant/pathConstant";
+const { RESULT } = PATH;
 export default function TestResult({ result }) {
   const navigate = useNavigate();
   const handleNavigateToResults = () => {
-    navigate("/results", { replace: true });
+    navigate(RESULT, { replace: true });
   };
   return (
     <section className="bg-white rounded-lg shadow-md min-w-lg h-full overflow-y-scroll w-[100%] max-w-[700px] p-4 sm:p-4  md:p-8 md:w-[60%] ">

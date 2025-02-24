@@ -11,6 +11,8 @@ import { ALERT_TYPE } from "../constant/alertConstant";
 import { openAlert } from "../utils/openAlert";
 
 const { ERROR, INFO } = ALERT_TYPE;
+const QUERY_KEY = "testResults";
+
 const TestPage = () => {
   const queryClient = useQueryClient();
   const [result, setResult] = useState(null);
@@ -27,7 +29,7 @@ const TestPage = () => {
   };
 
   const { data: userResult } = useQuery({
-    queryKey: ["testResults", user?.userId, user?.nickname],
+    queryKey: [QUERY_KEY, user?.userId, user?.nickname],
     queryFn: getUserResult,
     staleTime: Infinity,
     gcTime: 1000 * 60,
@@ -56,7 +58,7 @@ const TestPage = () => {
     mutationFn: handleTestSubmit,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["testResults"],
+        queryKey: [QUERY_KEY],
       });
     },
   });

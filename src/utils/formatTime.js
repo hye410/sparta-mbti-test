@@ -1,4 +1,4 @@
-/**
+/** 한국 시간으로 변환하여  YYYY-MM-dd HH:mm:ss 형태로 반환해 주는 함수
  * @param {date} date
  * @returns YYYY-MM-dd HH:mm:ss
  */

@@ -2,6 +2,12 @@ import Swal from "sweetalert2";
 import { ALERT_TYPE } from "../constant/alertConstant";
 
 const { ERROR, INFO, SUCCESS, WARNING } = ALERT_TYPE;
+
+/**
+ * type에 맞는 alert를 반환하는 함수
+ * @param {object} param0
+ * @returns
+ */
 export const openAlert = ({ type, text, buttonText }) => {
   const alertType = {
     [ERROR]: {

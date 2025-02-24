@@ -3,6 +3,7 @@ import { signup } from "../api/auth";
 import Form from "../components/common/Form";
 import { openAlert } from "../utils/openAlert";
 import { ALERT_TYPE } from "../constant/alertConstant";
+import { PATH } from "../constant/pathConstant";
 
 const signupFormData = [
   {
@@ -27,6 +28,7 @@ const signupFormData = [
 ];
 
 const { SUCCESS, ERROR } = ALERT_TYPE;
+const { LOGIN } = PATH;
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ export default function Signup() {
         type: SUCCESS,
         text: `${userInfo.nickname}님 환영합니다! 로그인을 해주세요.`,
       });
-      navigate("/login", { replace: true });
+      navigate({ LOGIN }, { replace: true });
     } catch (error) {
       console.error(error);
       openAlert({ type: ERROR, text: error.message });
@@ -56,7 +58,7 @@ export default function Signup() {
         />
         <p className="ps">
           이미 계정이 있으신가요?{" "}
-          <Link to="/login" className="text-red-600 underline">
+          <Link to={LOGIN} className="text-red-600 underline">
             로그인
           </Link>
         </p>

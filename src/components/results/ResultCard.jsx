@@ -3,11 +3,15 @@ import {
   deleteTestResult,
   updateTestResultVisibility,
 } from "../../api/testResults";
-import { mbtiDescriptions } from "../../utils/mbtiCalculator";
 import useUserStore from "../../zustand/userStore";
+import { mbtiDescriptions } from "../../utils/mbtiCalculator";
 import { openAlert } from "../../utils/openAlert.js";
 import { ALERT_TYPE } from "../../constant/alertConstant.js";
+
 const { WARNING, ERROR } = ALERT_TYPE;
+
+const QUERY_KEY = "testResults";
+
 export default function ResultCard({ result }) {
   const queryClient = useQueryClient();
   const { user } = useUserStore();
@@ -23,6 +27,15 @@ export default function ResultCard({ result }) {
     }
   };
 
+  const { mutate: mutateVisibility } = useMutation({
+    mutationFn: handleChangeVisibility,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY],
+      });
+    },
+  });
+
   const handleDelete = async (id) => {
     try {
       await deleteTestResult(id);
@@ -32,20 +45,11 @@ export default function ResultCard({ result }) {
     }
   };
 
-  const { mutate: mutateVisibility } = useMutation({
-    mutationFn: handleChangeVisibility,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["testResults"],
-      });
-    },
-  });
-
   const { mutate: mutateDelete } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["testResults"],
+        queryKey: [QUERY_KEY],
       });
     },
   });
@@ -61,6 +65,7 @@ export default function ResultCard({ result }) {
           isVisible: !result.visibility,
         });
     }
+
     openAlert({
       type: WARNING,
       text,

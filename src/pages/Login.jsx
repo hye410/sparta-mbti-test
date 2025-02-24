@@ -4,6 +4,7 @@ import Form from "../components/common/Form";
 import { useAuth } from "../context/AuthContext";
 import { openAlert } from "../utils/openAlert";
 import { ALERT_TYPE } from "../constant/alertConstant";
+import { PATH } from "../constant/pathConstant";
 
 const loginFormdata = [
   {
@@ -22,6 +23,7 @@ const loginFormdata = [
 ];
 
 const { ERROR } = ALERT_TYPE;
+const { SIGN_UP } = PATH;
 export default function Login() {
   const { login } = useAuth();
 
@@ -47,7 +49,7 @@ export default function Login() {
         />
         <p className="ps">
           아직 회원이 아니세요?{" "}
-          <Link to="/signup" className="text-red-600 underline">
+          <Link to={SIGN_UP} className="text-red-600 underline">
             회원가입
           </Link>
         </p>

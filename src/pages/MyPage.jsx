@@ -4,6 +4,7 @@ import Form from "../components/common/Form";
 import useUserStore from "../zustand/userStore";
 import { openAlert } from "../utils/openAlert";
 import { ALERT_TYPE } from "../constant/alertConstant";
+import { PATH } from "../constant/pathConstant";
 
 const profileFormData = (initNickname) => [
   {
@@ -16,6 +17,7 @@ const profileFormData = (initNickname) => [
   },
 ];
 const { SUCCESS, ERROR } = ALERT_TYPE;
+const { LOGIN } = PATH;
 export default function MyPage() {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore((state) => state);
@@ -35,7 +37,7 @@ export default function MyPage() {
         text: error.message,
       }).then((res) => {
         if (res.isConfirmed) {
-          error.code === 401 ? navigate("/login", { replace: true }) : null;
+          error.code === 401 ? navigate(LOGIN, { replace: true }) : null;
         }
       });
     }

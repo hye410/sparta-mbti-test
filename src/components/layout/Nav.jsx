@@ -43,6 +43,7 @@ export default function Nav() {
     navigate("/");
   };
 
+  // 로그인 여부에 따라 노출되는 메뉴를 다르게 함
   const navMenu = isAuthenticated
     ? AuthenticatedMenu(handleLogout)
     : PublicMenu();
@@ -51,7 +52,9 @@ export default function Nav() {
     <li
       key={menu.name}
       className={`cursor-pointer ${
-        menu.name === "프로필" ? "sm:ml-auto" : "sm:ml-8"
+        menu.name === AuthenticatedMenu(handleLogout)[0].name
+          ? "sm:ml-auto"
+          : "sm:ml-8"
       }`}
     >
       {menu.type === MENU_TYPE.LINK ? (
