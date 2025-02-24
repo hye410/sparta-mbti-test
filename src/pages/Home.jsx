@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center h-svh md:h-full">
+    <section className="flex flex-col items-center justify-center  md:h-full">
       <h1 className="h3">무료 성격 테스트</h1>
       <p className="mb-[40px] text-md text-center sm:text-justify sm:break-keep sm:text-lg lg:text-2xl">
         자신의 성격 유형을 확인할 수 있도록 솔직하게 답변해 주세요.

@@ -20,3 +20,6 @@
 .ps {
   @apply text-sm text-slate-400 mt-[20px];
 }
+.home {
+  @apply flex flex-col items-center justify-center;
+}
