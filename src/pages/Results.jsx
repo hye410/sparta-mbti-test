@@ -5,6 +5,7 @@ import useUserStore from "../zustand/userStore";
 import { openAlert } from "../utils/openAlert";
 import { ALERT_TYPE } from "../constant/alertConstant";
 import Empty from "../components/results/Empty";
+import Loading from "../components/common/Loading";
 const { ERROR } = ALERT_TYPE;
 export default function Results() {
   const { user } = useUserStore((state) => state);
@@ -38,14 +39,16 @@ export default function Results() {
     },
   });
 
-  if (isFetching) {
-    return <div>데이터를 받아오는 중..</div>;
+  if (isFetching || isPending) {
+    return <Loading notification={"데이터를 받아오는 중..."} />;
   }
-  if (isPending) {
-    return <div>데이터 로딩 중...</div>;
-  }
+
   if (isError) {
-    return <div>에러가 발생했습니다.</div>;
+    return (
+      <div className="w-[full]  flex items-center justify-center text-2xl">
+        ‼️ 에러가 발생했습니다.
+      </div>
+    );
   }
 
   return results.length === 0 ? (
