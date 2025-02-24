@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://www.nbcamp-react-auth.link",
+  baseURL: import.meta.env.VITE_SERVER_API,
 });
 
 api.interceptors.response.use(null, (reject) => {
@@ -13,7 +13,7 @@ api.interceptors.response.use(null, (reject) => {
 });
 
 export const localApi = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: import.meta.env.VITE_JSON_SERVER_API,
 });
 
 localApi.interceptors.response.use(null, (reject) => {
