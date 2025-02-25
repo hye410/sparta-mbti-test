@@ -21,6 +21,7 @@ const { LOGIN } = PATH;
 export default function MyPage() {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore((state) => state);
+
   const handleChangeProfile = async (e, newProfile) => {
     e.preventDefault();
     try {
@@ -37,11 +38,12 @@ export default function MyPage() {
         text: error.message,
       }).then((res) => {
         if (res.isConfirmed) {
-          error.code === 401 ? navigate(LOGIN, { replace: true }) : null;
+          error.code === 401 ? navigate(LOGIN, { replace: true }) : null; //프로필 변경 요청 시 토큰이 만료되었을 경우 login페이지로 이동
         }
       });
     }
   };
+
   return (
     <div className="formWrapper">
       <section className="form">
