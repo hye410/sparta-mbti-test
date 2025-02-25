@@ -11,8 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const login = (userInfo) => {
-    const { accessToken, userId, nickname, avatar } = userInfo;
-    sessionStorage.setItem("accessToken", accessToken);
+    const { userId, nickname, avatar } = userInfo;
     setUser({ userId, nickname, avatar });
     setIsAuthenticated(true);
     navigate("/");
